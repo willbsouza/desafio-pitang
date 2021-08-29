@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Cadastro de Usuário</title>
+</h:head>
+<h:body>
+	<h:form id="form">
+	<p:messages autoUpdate="true" showDetail="true"></p:messages>
+		<h:panelGrid columns="2">
+			<p:outputLabel value="Nome" />
+			<p:inputText id="nome" value="#{usuarioController.usuario.nome}" />
+			<p:outputLabel value="E-mail" />
+			<p:inputText id="email" value="#{usuarioController.usuario.email}" />
+			<p:outputLabel value="Senha" />
+			<p:password id="senha" value="#{usuarioController.usuario.senha}" />
+			<p:outputLabel value="Telefone" />
+			<p:inputMask id="fone" mask="(99) 99999-9999" value="#{usuarioController.usuario.fone}" />
+			<p:outputLabel value="Tipo" />
+			<p:inputText id="tipoFone" value="#{usuarioController.usuario.tipoFone}" />
+			<p:commandButton value="Confirmar" action="#{usuarioController.adicionarUsuario}" update="table"/>
+			<p:commandButton value="Listar Todos" action="#{usuarioController.listar}" update="table"/>
+		</h:panelGrid>
+	</h:form>
+	<br/>
+	<p:dataTable value="#{usuarioController.usuarios}" var="user" border="1"
+			id="table">
+			<p:column>
+			<p:commandButton value="Editar" action="#{usuarioController.editar(user)}" update="form"/>
+			<p:commandButton value="Deletar" action="#{usuarioController.deletar(user)}" update="form"/>
+			</p:column>
+			<p:column headerText="Nome">#{user.nome}</p:column>
+			<p:column headerText="Email">#{user.email}</p:column>
+			<p:column headerText="Senha">#{user.senha}</p:column>
+			<p:column headerText="Fone">#{user.fone}</p:column>
+			<p:column headerText="Tipo Fone">#{user.tipoFone}</p:column>
+		</p:dataTable>
+</h:body>
+</html>
